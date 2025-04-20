@@ -1,0 +1,28 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genuinebnt/blog-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/genuinebnt/blog-js/issues"
+  },
+  "homepage": "https://github.com/genuinebnt/blog-js#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "supertest": "^7.1.0",
+    "vitest": "^3.1.1"
+  }
+}
