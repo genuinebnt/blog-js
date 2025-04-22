@@ -2,11 +2,6 @@
   "name": "blog",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "start": "node src/server.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/genuinebnt/blog-js.git"
@@ -18,13 +13,58 @@
   },
   "homepage": "https://github.com/genuinebnt/blog-js#readme",
   "description": "",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*"
+  },
+  "scripts": {
+    "dev": "tsx --watch --env-file .env.development src/index.ts",
+    "dev:prod": "tsx --watch --env-file .env.production src/index.ts",
+    "start": "node src/server.js",
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest run --coverage",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --check"
+    ],
+    "*.{json,yml,yaml,md}": [
+      "prettier --check"
+    ]
+  },
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^5.1.0"
   },
-  "type": "module",
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@eslint/js": "^9.25.1",
+    "@tsconfig/node22": "^22.0.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.1",
+    "@types/supertest": "^6.0.3",
+    "@vitest/coverage-v8": "^3.1.2",
+    "@vitest/eslint-plugin": "^1.1.43",
+    "eslint": "^9.25.1",
+    "eslint-plugin-perfectionist": "^4.12.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3",
     "supertest": "^7.1.0",
-    "vitest": "^3.1.1"
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0",
+    "vitest": "^3.1.2"
   }
 }

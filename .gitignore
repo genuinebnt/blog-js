@@ -1,4 +1,16 @@
-node_modules
-package-lock.json
+# Environment variables
 .env
 .env.*
+!.env.example
+
+# Dependencies
+/node_modules
+
+# TypeScript build output
+/dist
+
+# OS generated files
+.DS_Store
+
+# Test coverage
+/coverage
