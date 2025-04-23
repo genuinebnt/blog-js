@@ -1,9 +1,7 @@
-import pool from "#config/db.js";
+import app from "#app.js";
 import http from "http";
 import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-
-import app from "../src/app.js";
 
 let server: http.Server;
 let port: number;
@@ -12,24 +10,18 @@ beforeAll(async () => {
   server = app.listen(0);
   await new Promise((resolve) => server.once("listening", resolve));
   const address = server.address();
-  if (typeof address == "object" && address?.port) {
+  if (typeof address === "object" && address?.port) {
     port = address.port;
-  } else {
-    throw new Error("Failed to get server port");
   }
 });
 
-afterAll(() => {
-  server.close();
-});
+afterAll(() => server.close());
 
-describe("GET /healthcheck", () => {
-  it("returns 200 for healthy server", async () => {
-    await pool.query("SELECT 1;");
-
+describe("GET /v1/users", () => {
+  it("returns 200", async () => {
     const res = await request(`http://localhost:${port.toString()}`).get(
-      "/v1/healthcheck",
+      "/v1/users",
     );
-    expect(res.statusCode).toBe(200);
+    expect(res.status).toBe(200);
   });
 });
