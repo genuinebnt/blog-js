@@ -16,7 +16,8 @@ export class UserController {
   deleteUser = async (req: Request, res: Response) => {
     const isSuccess = await this.userService.deleteUser(req.params.id);
     if (!isSuccess) {
-      return res.status(404).send("User not found ");
+      res.status(404).send("User not found ");
+      return;
     }
     res.status(204).send();
   };
@@ -24,7 +25,8 @@ export class UserController {
   getUser = async (req: Request, res: Response) => {
     const user = await this.userService.getUser(req.params.id);
     if (!user) {
-      return res.status(404).send("Not found");
+      res.status(404).send("Not found");
+      return;
     }
     res.json(user);
   };
@@ -40,7 +42,8 @@ export class UserController {
   ) => {
     const updated = await this.userService.updateUser(req.params.id, req.body);
     if (!updated) {
-      return res.status(404).send("User not found");
+      res.status(404).send("User not found");
+      return;
     }
     res.json(updated);
   };
