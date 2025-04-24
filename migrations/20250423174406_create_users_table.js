@@ -4,9 +4,9 @@
  */
 export function up(knex) {
   return knex.schema.createTable("users", (table) => {
-    table.uuid("id");
+    table.uuid("id").primary().unique();
     table.string("name");
-    table.string("email");
+    table.string("email").unique();
     table.timestamps("created_at");
   });
 }

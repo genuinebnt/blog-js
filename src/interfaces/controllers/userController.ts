@@ -1,16 +1,26 @@
 import { UserService } from "#application/userService.js";
 import { User } from "#domain/entities/user.js";
+import { AppError } from "#errors/error.js";
 import { Request, Response } from "express";
 
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   createUser = async (
-    req: Request<unknown, unknown, Omit<User, "id">>,
+    req: Request<unknown, unknown, Omit<User, "created_at" & "id">>,
     res: Response,
   ) => {
-    const user = await this.userService.createUser(req.body);
-    res.status(201).json(user);
+    try {
+      const user = await this.userService.createUser(req.body);
+      res.status(201).json(user);
+    } catch (err) {
+      if (err instanceof AppError) {
+        if (err.name === "USER_ALEADY_EXISTS") {
+          res.status(409).json({ message: err.message });
+        }
+      }
+      res.status(500).json({ message: "Error processing request" });
+    }
   };
 
   deleteUser = async (req: Request, res: Response) => {

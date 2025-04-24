@@ -4,6 +4,6 @@
     "outDir": "./dist",
     "rootDir": "./"
   },
-  "include": ["**/*.ts", "knexfile.js"],
+  "include": ["**/*.ts", "__tests__/**/*.ts", "knexfile.js"],
   "exclude": ["dist"]
 }

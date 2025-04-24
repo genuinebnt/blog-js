@@ -1,30 +1,9 @@
 import pool from "#config/db.js";
-import http from "http";
 import request from "supertest";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
-
-import app from "../src/app.js";
-
-let server: http.Server;
-let port: number;
-
-beforeAll(async () => {
-  server = app.listen(0);
-  await new Promise((resolve) => server.once("listening", resolve));
-  const address = server.address();
-  if (typeof address == "object" && address?.port) {
-    port = address.port;
-  } else {
-    throw new Error("Failed to get server port");
-  }
-});
-
-afterAll(() => {
-  server.close();
-});
+import { describe, expect, it } from "vitest";
 
 describe("GET /healthcheck", () => {
-  it("returns 200 for healthy server", async () => {
+  it("returns 200 for healthy server", async ({ port }) => {
     await pool.query("SELECT 1;");
 
     const res = await request(`http://localhost:${port.toString()}`).get(
