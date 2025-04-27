@@ -6,10 +6,12 @@ import bodyParser from "body-parser";
 import express from "express";
 
 const app = express();
-export const logger = new PinoLogger();
 
+export const logger = new PinoLogger();
 app.use(pinoHTTPInstance);
+
 app.use(bodyParser.json());
+
 app.use("/v1/healthcheck", healthCheckRouter);
 app.use("/v1/users", userRouter);
 

@@ -20,7 +20,7 @@ export const pinoHTTPInstance = pinoHttp({
   serializers: {
     req: (req: Request) => {
       return {
-        body: req.body as Record<string, unknown>,
+        body: req.body as string,
         headers: req.headers,
         method: req.method,
         url: req.url,
