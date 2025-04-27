@@ -1,4 +1,4 @@
-import { UserService } from "#application/userService.js";
+import { UserService } from "#application/user.service.js";
 import { User } from "#domain/entities/user.js";
 import { AppError } from "#errors/error.js";
 import { Request, Response } from "express";

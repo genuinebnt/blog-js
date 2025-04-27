@@ -1,7 +1,7 @@
-import { UserService } from "#application/userService.js";
+import { UserService } from "#application/user.service.js";
 import pool from "#config/db.js";
-import { PostgresUserRepository } from "#infrastructure/postgres/userRepository.js";
-import { UserController } from "#interfaces/controllers/userController.js";
+import { PostgresUserRepository } from "#infrastructure/postgres/user.repository.js";
+import { UserController } from "#interfaces/controllers/user.controller.js";
 import express from "express";
 
 const router = express();
