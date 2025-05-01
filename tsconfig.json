@@ -2,9 +2,7 @@
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "rootDir": "./"
   },
   "include": ["**/*.ts", "__tests__/**/*.ts", "knexfile.js"],
   "exclude": ["dist"]

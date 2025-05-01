@@ -19,14 +19,13 @@ export class UserController {
           res.status(409).json({ message: err.message });
         }
       }
-      res.status(500).json({ message: "Error processing request" });
     }
   };
 
   deleteUser = async (req: Request, res: Response) => {
     const isSuccess = await this.userService.deleteUser(req.params.id);
     if (!isSuccess) {
-      res.status(404).send("User not found ");
+      res.status(404).send("User not found");
       return;
     }
     res.status(204).send();
