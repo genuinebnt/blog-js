@@ -1,6 +1,5 @@
 import { UserService } from "#application/user.service.js";
 import { User } from "#domain/entities/user.js";
-import { AppError } from "#errors/error.js";
 import { Request, Response } from "express";
 
 /**
@@ -38,19 +37,11 @@ export class UserController {
    * - Returns 409 Conflict if a user with the same email already exists
    */
   createUser = async (
-    req: Request<unknown, unknown, Omit<User, "created_at" & "id">>,
+    req: Request<unknown, unknown, Omit<User, "created_at" | "id">>,
     res: Response,
   ) => {
-    try {
-      const user = await this.userService.createUser(req.body);
-      res.status(201).json(user);
-    } catch (err) {
-      if (err instanceof AppError) {
-        if (err.name === "USER_ALEADY_EXISTS") {
-          res.status(409).json({ message: err.message });
-        }
-      }
-    }
+    const user = await this.userService.createUser(req.body);
+    res.status(201).json(user);
   };
 
   /**

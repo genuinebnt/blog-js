@@ -1,6 +1,6 @@
 import { logger } from "#app.js";
 import { User, UserRepository } from "#domain/entities/user.js";
-import { AppError } from "#errors/error.js";
+import { AppDatabaseError } from "#errors/database.error.js";
 import { DatabaseError, Pool } from "pg";
 import { v4 as uuidv4 } from "uuid";
 
@@ -45,10 +45,11 @@ export class PostgresUserRepository implements UserRepository {
     } catch (err: unknown) {
       if (err instanceof DatabaseError) {
         if (err.code === "23505") {
-          logger.error("User already exists");
-          throw new AppError({
-            message: "User already exists in database",
-            name: "USER_ALEADY_EXISTS",
+          throw new AppDatabaseError({
+            code: 409,
+            context: { email: user.email, name: user.name },
+            logging: true,
+            message: "User already exists",
           });
         }
       }

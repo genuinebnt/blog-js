@@ -16,6 +16,7 @@
  */
 import { PinoLogger } from "#infrastructure/logger/pino.logger.js";
 import { pinoHTTPInstance } from "#infrastructure/logger/pino.logger.middleware.js";
+import { errorHandler } from "#infrastructure/middleware/errors.js";
 import healthCheckRouter from "#interfaces/routers/health_check.route.js";
 import testRequestIdRouter from "#interfaces/routers/test-request-id.route.js";
 import userRouter from "#interfaces/routers/user.router.js";
@@ -79,6 +80,8 @@ app.use("/v1/users", userRouter);
  * @see {@link testRequestIdRouter}
  */
 app.use("/v1/test-request-id", testRequestIdRouter);
+
+app.use(errorHandler);
 
 /**
  * Export the configured Express application as the default export.
